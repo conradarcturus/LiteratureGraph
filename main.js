@@ -1,12 +1,13 @@
 
 var width = 960,
-    height = 500;
+    height = 800;
 
 var color = d3.scale.category20();
 
 var force = d3.layout.force()
-    .charge(-120)
-    .linkDistance(30)
+    .gravity(.05)
+    .charge(-300)
+    .distance(100)
     .size([width, height]);
 
 var svg = d3.select("body").append("svg")
@@ -25,15 +26,27 @@ d3.json("data.json", function(error, graph) {
       .attr("class", "link")
       .style("stroke-width", function(d) { return Math.sqrt(d.value); });
 
-  var node = svg.selectAll(".node")
+  var nodes = svg.selectAll(".node")
       .data(graph.nodes)
-    .enter().append("circle")
+    .enter().append("g")
       .attr("class", "node")
-      .attr("r", 5)
-      .style("fill", function(d) { return color(d.group); })
       .call(force.drag);
 
-  node.append("title")
+  nodes.append("rect")
+      .attr("class", "node")
+      .attr("width", 100)
+      .attr("height", 20)
+      .style("fill", function(d) { return color(d.group); })
+
+  nodes.append("title")
+      .text(function(d) { return d.name; });
+
+  nodes.append("text")
+      // .attr("dx", 12)
+      .attr("dy", "1em")
+      .style("stroke", "none")
+      .style("fill", "black")
+      // .style("font-weight", "bold")
       .text(function(d) { return d.name; });
 
   force.on("tick", function() {
@@ -42,7 +55,6 @@ d3.json("data.json", function(error, graph) {
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
 
-    node.attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
+    nodes.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
   });
 });
