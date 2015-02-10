@@ -42,9 +42,6 @@ function editNode(node, d) {
   console.log("editNode", node);
 
   // inject a HTML form to edit the content here...
-
-  // bug in the getBBox logic here, but don't know what I've done wrong here;
-  // anyhow, the coordinates are completely off & wrong. :-((
   var xy = node.getBBox();
   var p_xy = p.getBBox();
 
@@ -169,49 +166,20 @@ function restart() {
   node = node.data(nodes);
 
   freshnode = node.enter().append("g")
-      .attr("class", "node")
-      .on("dblclick", function(d) {
-          editNode(this, d);
-        })
-      .on("mousedown", function(d) {
-        d3.event.stopPropagation();
-        if (d3.event.shiftKey) 
-          return; // ignore drag, doesn't work
-        })
-      .call(force.drag);
-
+    .attr("class", "node")
+    .on("dblclick", function(d) {
+        editNode(this, d);
+      })
+    .on("mousedown", function(d) {
+      d3.event.stopPropagation();
+      if (d3.event.shiftKey) 
+        return; // ignore drag, doesn't work
+      })
+    .call(force.drag);
     
-    // freshnode.append("text")
-    //   .attr("dx", "-50")
-    //   .attr("dy", "1em")
-    //   .text(function(d) { return d.name; })
-
-    freshnode.append("text")
-      .style("fill", function(d) { return color(d.group); })
-      .text(function(d) { return d.name; });
-
-    // freshnode.append("rect")
-    //   .attr("rx", 5)
-    //   .attr("ry", 5)
-    //   // .attr("class", "node")
-    //   .attr("width", function(d) {return this.parentNode.getBBox().width;})
-    //   .attr("height", function(d) {return this.parentNode.getBBox().height;})
-    //   // .attr("x", function(d) {return this.parentNode.getBBox().width / -2;})
-    //   // .attr("y", function(d) {return this.parentNode.getBBox().height / -2;})
-    //   .attr("transform", function(d) {
-    //     bbox = this.parentNode.getBBox();
-    //     return "translate(" + (-bbox.width / 2) + ", " + (-bbox.height / 2) + ")";
-    //   })
-    //   .style("fill", function(d) { return color(d.group); });
-
-    // freshnode.forEach(function(fnode) {
-    //   fnode.append("rect")
-    //     // .attr("class", "node")
-    //     .attr("width", fnode.getBBox().width + 2)
-    //     .attr("height", fnode.getBBox().height + 2)
-    //     .attr("transform", "translate(-50, 0)")
-    //     .style("fill", function(d) { return color(d.group); });
-    // });
+  freshnode.append("text")
+    .style("fill", function(d) { return color(d.group); })
+    .text(function(d) { return d.name; });
 
   force.start();
 }
@@ -242,15 +210,6 @@ d3.json("data.json", function(error, graph) {
 
 // Save Data
 function saveData() {
-  // Prepare data
-  // var fancynodes = [];
-  // for(i = 0; i < nodes.length; i++) {
-  //   fancynode = {};
-  //   fancynode.name = nodes[i].name;
-  //   fancynode.group = nodes[i].group;
-  //   fancynode.index = nodes[i].index;
-  //   fancynodes.push(fancynode);
-  // }
 
   var fancylinks = [];
   for(i = 0; i < links.length; i++) {
