@@ -1,11 +1,66 @@
+body {
+	font-family: Avenir;
+}
+
+#graphbox {
+	width: 1000px;
+	height: 800px;
+	border: 1px solid black;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+#detailbox {
+	width: 300px;
+	height: 600px;
+	border: 1px solid black;
+	position: absolute;
+	top: 10px;
+	left: 1020px;
+}
+
+#nodeeditbox {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+#nodeeditbox div.featurebox {
+	width: 300px;
+	height: 30px;
+}
+
+.featurebox .featuretitle {
+	width: 80px;
+	font-size: 0.8em;
+	text-align: right;
+	position: absolute;
+}
+
+.featurebox input {
+	width: 200px;
+	position: absolute;
+	left: 90px;
+}
+
 .node {
   stroke: #fff;
   stroke-width: 1.5px;
 }
 
+.node.selected {
+  stroke: #00f;
+}
+
 .link {
   stroke: #999;
   stroke-opacity: .6;
+  stroke-width: 1;
+}
+
+.link.selected {
+  stroke: #009;
+  stroke-width: 3;
 }
 
 svg text {
@@ -21,10 +76,8 @@ svg rect {
 	alignment-baseline: middle;
 }
 
-#toolbar {
-
+.arrowhead {
+	fill: black;
+  	opacity: .6;
 }
-/*
-g text {
-  fill: black;
-}*/
+

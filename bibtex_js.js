@@ -136,7 +136,7 @@ function BibtexParser() {
       }
       this.pos++;
     }
-    console.log(entries);
+    // console.log(entries);
 
     return entries;
   }
