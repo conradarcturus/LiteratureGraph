@@ -7,7 +7,8 @@ var color = d3.scale.category20();
 
 var force = d3.layout.force()
   .gravity(.05)
-  .charge(-300)
+  .charge(-300) // -300
+  // .chargeDistance(200)
   .distance(100)
   .theta(0.8)
   .size([width, height])

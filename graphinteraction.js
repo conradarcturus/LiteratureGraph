@@ -39,14 +39,12 @@ function refreshNodeEditBox(citekey, citation) {
 			.html(description)
 			.attr("class", "authoryear");
 
-	// Add missing fields if necessary
-		addFeatureBox("title", citekey, citation);
-	// if(!("author" in citation))
-		addFeatureBox("author", citekey, citation);
-	// if(!("year" in citation))
-		addFeatureBox("year", citekey, citation);
+	// Add standard features
+	addFeatureBox("title", citekey, citation);
+	addFeatureBox("author", citekey, citation);
+	addFeatureBox("year", citekey, citation);
 
-	// Add new content
+	// Add any additional features
 	for (field in citation) {
 		// if(field == "read" || field == "title" || field == "author" || field == "year" || field == "citations" || field == "comments") {
 		if(["read", "title", "author", "year", "citations", "comments"].indexOf(field) != -1) {
@@ -57,10 +55,11 @@ function refreshNodeEditBox(citekey, citation) {
 	} // For each field
 
 	// Add custom fields
-	addFeatureBox("citations", citekey, citation)
-	addFeatureBox("read", citekey, citation)
+	addFeatureBox("citations", citekey, citation);
+	addFeatureBox("read", citekey, citation);
 	addCommentBox("comments", citekey, citation);
 
+	// Add the citation key to the bottom
 	nodeeditbox.append("div")
 		.text(citekey)
 		.attr("class", "citekey");
@@ -114,12 +113,8 @@ function addCommentBox(field, citekey, citation) {
 		.text(value)
 		.attr("value", value)
 		.on("keyup", function(d) {
-			console.log(this);
-			console.log(this.value);
 			citation[d] = this.value;
-			console.log(citation);
 			editCitation(citekey, citation);
-			console.log(bibObject);
         });
 
     return featurebox;

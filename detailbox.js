@@ -62,11 +62,12 @@ featurebox.append("div")
 
 featurebox.append("input")
 	.attr("type", "button")
-	.attr("value", "Add BibTex Information")
+	.attr("value", "Import BibTex Citation")
 	.attr("class", "featureinput")
 	.on("click", function(d) {
 		// console.log(bibtexinputbox[0][0].value);
 		addBibTex(bibtexinputbox[0][0].value);
+		bibtexinputbox[0][0].value = "";
     });
 
 bibtexinputbox = featurebox.append("textarea")
