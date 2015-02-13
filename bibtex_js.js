@@ -108,38 +108,61 @@ function BibtexParser() {
     }
   }
 
+
   this.value_brackets = function() {
-    var bracketcount = 0;
+    var bracecount = 0;
     this.match("[");
     var start = this.pos;
-    var entries = [];
-    var iEntry = 0;
     while(true) {
-    	// console.log(this.input[this.pos]);
       if (this.input[this.pos] == ']' && this.input[this.pos-1] != '\\') {
-        if (bracketcount > 0) {
-          bracketcount--;
+        if (bracecount > 0) {
+          bracecount--;
         } else {
           var end = this.pos;
           this.match("]");
-    	  entries[iEntry] = this.input.substring(start, end);
-          break;
+          return this.input.substring(start, end).split(/[, ]+/);
         }
       } else if (this.input[this.pos] == '[') {
-        bracketcount++;
-      } else if (this.input[this.pos] == ',') {
-	    entries[iEntry] = this.input.substring(start, this.pos);
-	    start = this.pos + 1;
-	    iEntry++;
+        bracecount++;
       } else if (this.pos == this.input.length-1) {
         throw "Unterminated value";
       }
       this.pos++;
     }
-    // console.log(entries);
-
-    return entries;
   }
+
+  // this.value_brackets = function() {
+  //   var bracketcount = 0;
+  //   this.match("[");
+  //   var start = this.pos;
+  //   var entries = [];
+  //   var iEntry = 0;
+  //   while(true) {
+  //   	// console.log(this.input[this.pos]);
+  //     if (this.input[this.pos] == ']' && this.input[this.pos-1] != '\\') {
+  //       if (bracketcount > 0) {
+  //         bracketcount--;
+  //       } else {
+  //         var end = this.pos;
+  //         this.match("]");
+  //   	  entries[iEntry] = this.input.substring(start, end);
+  //         break;
+  //       }
+  //     } else if (this.input[this.pos] == '[') {
+  //       bracketcount++;
+  //     } else if (this.input[this.pos] == ',') {
+	 //    entries[iEntry] = this.input.substring(start, this.pos);
+	 //    start = this.pos + 1;
+	 //    iEntry++;
+  //     } else if (this.pos == this.input.length-1) {
+  //       throw "Unterminated value";
+  //     }
+  //     this.pos++;
+  //   }
+  //   // console.log(entries);
+
+  //   return entries;
+  // }
 
   this.value_quotes = function() {
     this.match('"');

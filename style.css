@@ -12,12 +12,13 @@ body {
 }
 
 #detailbox {
-	width: 300px;
-	height: 600px;
+	width: 320px;
+	height: 800px;
 	border: 1px solid black;
 	position: absolute;
 	top: 10px;
 	left: 1020px;
+	padding: 10px;
 }
 
 #nodeeditbox {
@@ -25,22 +26,60 @@ body {
 	padding: 5px;
 }
 
-#nodeeditbox div.featurebox {
+
+#detailbox div.title {
 	width: 300px;
-	height: 30px;
+	font-weight: bold;
+	margin-bottom: 10px;
 }
 
-.featurebox .featuretitle {
+#nodeeditbox div.authoryear {
+	width: 300px;
+	font-size: 0.9em;
+	margin-bottom: 10px;
+}
+
+#nodeeditbox div.citekey {
+	width: 300px;
+	text-align: center;
+}
+
+#detailbox div.featurebox {
+	width: 300px;
+	height: 25px;
+	padding-top: 5px;
+}
+
+#detailbox .featuretitle {
 	width: 80px;
 	font-size: 0.8em;
 	text-align: right;
 	position: absolute;
 }
 
-.featurebox input {
+#detailbox input.featureinput {
 	width: 200px;
 	position: absolute;
+	left: 100px;
+}
+
+#detailbox div.commentbox {
+	width: 300px;
+	height: 120px;
+}
+/*
+.commentbox .commentsave {
 	left: 90px;
+	width: 40px;
+	top: -105px;
+	position: relative;
+}*/
+
+.commentbox .commentarea {
+	width: 300px;
+	height: 90px;
+	top: 20px;
+	position: relative;
 }
 
 .node {

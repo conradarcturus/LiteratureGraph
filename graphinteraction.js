@@ -17,48 +17,110 @@ function highlightNode(citekey) {
 			console.log(this.attr("class"));
 			return this.attr("class");
 		});
-
-
 }
 
 function refreshNodeEditBox(citekey, citation) {
 	// Clear the previous content
 	nodeeditbox.selectAll("*").remove();
 
+	if("title" in citation)
+		nodeeditbox.append("div")
+			.html(citation.title)
+			.attr("class", "title");
+
+	// Title/Author/Year Description
+	description = "";
+	if("author" in citation)
+		description += citation.author + ' ';
+	if("year" in citation)
+		description += '(' + citation.year + ')';
+	if(description.length > 0)
+		nodeeditbox.append("div")
+			.html(description)
+			.attr("class", "authoryear");
+
+	// Add missing fields if necessary
+		addFeatureBox("title", citekey, citation);
+	// if(!("author" in citation))
+		addFeatureBox("author", citekey, citation);
+	// if(!("year" in citation))
+		addFeatureBox("year", citekey, citation);
+
 	// Add new content
 	for (field in citation) {
+		// if(field == "read" || field == "title" || field == "author" || field == "year" || field == "citations" || field == "comments") {
+		if(["read", "title", "author", "year", "citations", "comments"].indexOf(field) != -1) {
+			// do nothing here
+		} else {
+			addFeatureBox(field, citekey, citation);
+		}
+	} // For each field
+
+	// Add custom fields
+	addFeatureBox("citations", citekey, citation)
+	addFeatureBox("read", citekey, citation)
+	addCommentBox("comments", citekey, citation);
+
+	nodeeditbox.append("div")
+		.text(citekey)
+		.attr("class", "citekey");
+}
+
+
+function addFeatureBox(field, citekey, citation) {
+	var value = "";
+	if(field in citation)
 		value = citation[field];
-		featurebox = nodeeditbox.append("div")
-			.attr("class", "featurebox");
 
-		featurebox.append("div")
-			.text(field)
-			.attr("class", "featuretitle");
+	featurebox = nodeeditbox.append("div")
+		.attr("class", "featurebox");
 
-		featurebox.append("input")
-			.data([field])
-			.attr("value", value)
-			.on("keypress", function(d) {
-				// console.log("keypress", node, d3.event.keyCode);
-				// console.log(d);
-				// console.log(this.value);
+	featurebox.append("div")
+		.text(field)
+		.attr("class", "featuretitle");
 
-				// IE fix
-				if (!d3.event)
-					d3.event = window.event;
+	featurebox.append("input")
+		.data([field])
+		.attr("value", value)
+		.attr("class", "featureinput")
+		.on("keyup", function(d) {
+			if(d == "citations")
+				citation[d] = this.value.split(/[, ]+/);
+			else
+				citation[d] = this.value;
+			editCitation(citekey, citation);
+        });
 
-				var e = d3.event;
-				if (e.keyCode == 13) { // enter
-					if (typeof(e.cancelBubble) !== 'undefined') // IE
-						e.cancelBubble = true;
-					if (e.stopPropagation)
-						e.stopPropagation();
-					e.preventDefault();
+    return featurebox;
+}
 
-					citation[d] = this.value;
-					editCitation(citekey, citation);
-					bibTex2nodes(bibObject);
-				}
-	        });
-	}
+
+
+function addCommentBox(field, citekey, citation) {
+	var value = "";
+	if(field in citation)
+		value = citation[field];
+
+	featurebox = nodeeditbox.append("div")
+		.attr("class", "commentbox");
+
+	featurebox.append("div")
+		.text(field)
+		.attr("class", "featuretitle");
+
+	inputbox = featurebox.append("textarea")
+		.attr("class", "commentarea")
+		.data([field])
+		.text(value)
+		.attr("value", value)
+		.on("keyup", function(d) {
+			console.log(this);
+			console.log(this.value);
+			citation[d] = this.value;
+			console.log(citation);
+			editCitation(citekey, citation);
+			console.log(bibObject);
+        });
+
+    return featurebox;
 }

@@ -1,8 +1,5 @@
 var bibObject = {};
-// bibObject["practice"] = {};
-// bibObject["practice"].year = 2015;
-// bibObject["practice"].author = "Conrad";
-
+var btparser = new BibtexParser();
 
 function getBibObject() {
 	return bibObject;
@@ -19,20 +16,24 @@ function editCitation(citekey, citation) {
 function loadBibFile (bibFile) {
 	// Read File
 	$.get(bibFile, function( bib_data ) {
-	    var btparser = new BibtexParser();
-	    btparser.setInput(bib_data);
-	    btparser.bibtex();
-
-	    // iterate over bibTeX entries
-	    var entries = btparser.getEntries();
-
-		// Merge with previous bibliography object
-		bibObject = $.extend({}, bibObject, entries);
-		setBibObject(bibObject);
-
-		// Reset the graph
-		bibTex2nodes(bibObject);
+	    addBibTex(bib_data);
 	});
+}
+
+function addBibTex (bib_data) {
+	btparser = new BibtexParser();
+    btparser.setInput(bib_data);
+    btparser.bibtex();
+
+    // iterate over bibTeX entries
+    var entries = btparser.getEntries();
+
+	// Merge with previous bibliography object
+	bibObject = $.extend({}, bibObject, entries);
+	setBibObject(bibObject);
+
+	// Reset the graph
+	bibTex2nodes(bibObject);
 }
 
 function makeBibTex () {
@@ -53,7 +54,7 @@ function makeBibTex () {
 		citestr += "\n}";
 		data[data.length] = citestr;
 	}
-	data = data.join(",\n");
+	data = data.join("\n");
 	console.log(data);
 
 	var url = 'data:text/json;charset=utf8,' + encodeURIComponent(data);

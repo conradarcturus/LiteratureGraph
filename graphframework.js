@@ -60,14 +60,6 @@ var nextNodeID = 0;
 // }
 
 function tick() {
-  // link.attr("x1", function(d) { return d.source.x; })
-  //     .attr("y1", function(d) { return d.source.y; })
-  //     .attr("x2", function(d) { return d.target.x; })
-  //     .attr("y2", function(d) { return d.target.y; });
-  // link.attr("x1", function(d) { return d.source.x; })
-  //     .attr("y1", function(d) { return d.source.y; })
-  //     .attr("x2", function(d) { return d.target.x; })
-  //     .attr("y2", function(d) { return d.target.y; });
   d3.selectAll(".linkgroup")
     .attr("transform", function(d) {
       var dx = d.target.x - d.source.x, 
@@ -101,107 +93,36 @@ function graph_restart() {
   svggs.append("polygon")
     .attr("class", "arrowhead")
     .attr("points", "1,0 .9,-5 .9,5");
-      // .style("stroke-width", function(d) { return Math.sqrt(d.value); });
-      // .append("circle")
-      //   .attr("r", "10px")
-      //   .attr('transform', function(d) { 
-      //     var dx = d.target.x - d.source.y, 
-      //         dy = d.target.y - d.source.y, 
-      //         da = Math.atan2(dy, dx) * 180 / Math.PI; 
-      //     return 'translate('+ d.target.x +','+ d.target.y +')' 
-      //       + 'rotate('+ da +')'; 
-      //  });
-
-  // var linkEnter = link
-  //   .enter()
-  //   .append("svg:g");
-
-
-  // linkEnter.insert("line", ".node")
-  //     .attr("x1", function(d) { return d.source.x })
-  //     .attr("y1", function(d) { return d.source.y })
-  //     .attr("x2", function(d) { return d.target.x })
-  //     .attr("y2", function(d) { return d.target.y })
-  //     .attr("class", function(d) {
-  //       console.log(d);
-  //       classes = ["link",
-  //         "cited_" + d.source.citekey,
-  //         "citer_" + d.target.citekey]
-  //       return classes.join(" ");
-  //     });
-
-  // var linkPath = linkEnter
-  //   .append("svg:path")      
-  //   .attr("class", function(d) {
-  //     classes = ["link",
-  //       "cited_" + d.source.citekey,
-  //       "citer_" + d.target.citekey]
-  //     return classes.join(" ");
-  //   })
-  //   .attr("id", 
-  //     function(d) { 
-  //       return "path" + d.source.index + "_" + d.target.index; 
-  //     }) 
-  //   // .attr("d", 
-  //   //   function(d) { 
-  //   //     return moveto(d) + lineto(d); 
-  //   //   }) 
-  //   .attr("marker-end", function(d){
-  //     return "url(#marker"+d.source.index+"_"+d.target.index+")"
-  //   });
-  // var linkMarker = linkEnter
-  //   .append("svg:marker")
-  //   .attr("id",function(d){ return "marker"+d.source.index+"_"+d.target.index} )
-  //   .attr("viewBox","0 0 20 20")
-  //   .attr("refX","30")
-  //   .attr("refY","10")
-  //   .attr("markerUnits","strokeWidth")
-  //   .attr("markerWidth","11")
-  //   .attr("markerHeight","7")
-  //   .attr("orient","auto")
-  // var linkMarkerPath = linkMarker
-  //   .append("svg:path")
-  //     .attr("d","M 0 0 L 20 10 L 0 20 z");
-      
-  // var linkLabel = linkEnter
-  //   .append("svg:text")
-  //   .attr("text-anchor", "start")
-  //   .attr("font-size", 10) 
-  //   .append("svg:textPath") 
-  //   .attr("startOffset", "25")
-  //   .attr("xlink:href", 
-  //       function(d) { return "#path" + d.source.index + "_" + d.target.index;
-  //   }) 
-  //   .text(function(d) {
-  //     var output = "";
-  //     if(d.weight) {
-  //       output = " Weight: "+d.weight +" "+ d.HEName + " ->" ;
-  //     }
-  //     return output; 
-  //   });
-
-
 
   node = node.data(nodes);
 
   freshnode = node.enter().append("g")
     .attr("class", "node")
-    // .on("dblclick", function(d) {
-    //     editNode(this, d);
-    //   })
     .on("mousedown", function(d) {
       d3.event.stopPropagation();
       selectNode(d);
       if (d3.event.shiftKey) 
-        return; // ignore drag, doesn't work
+        return; // try to ignore drag, but this doesn't work
       })
     .call(force.drag);
     
-  freshnode.append("text")
-    .style("fill", function(d) { return color(d.group); })
-    .text(function(d) { return d.name; });
+  freshnode.append("text");
+    // .style("fill", function(d) { return color(d.group); })
+    // .text(function(d) { return d.name; });
 
   force.start();
+
+  // Refresh text if necessary
+  node.selectAll(".node text")
+    .style("fill", function(d) {
+      switch(d.group) {
+        case "2": return "#171";
+        case "1": return "#177";
+        default: return "#117";
+      }
+      // return color(d.group);
+    })
+    .text(function(d) { return d.name; });
 }
 
 function addNode (citekey, citation) {
@@ -255,6 +176,8 @@ function connectNode (citekey, citation) {
       if(!existingEdge) {
 
         var node_cited = findNodeByCiteKey(cited);
+        if(!node_cited || !node_citer)
+          continue;
         links.push({source: node_cited, target: node_citer, value: 1});
 
         citationpair2edge[citer + "->" + cited] = links.length - 1;
