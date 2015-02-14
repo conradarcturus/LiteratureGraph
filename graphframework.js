@@ -7,9 +7,9 @@ var color = d3.scale.category20();
 
 var force = d3.layout.force()
   .gravity(.05)
-  .charge(-300) // -300
-  // .chargeDistance(200)
-  .distance(100)
+  .charge(-1000) // -300
+  .chargeDistance(150)
+  // .linkDistance(100)
   .theta(0.8)
   .size([width, height])
   .on("tick", tick);
@@ -93,7 +93,7 @@ function graph_restart() {
 
   svggs.append("polygon")
     .attr("class", "arrowhead")
-    .attr("points", "1,0 .9,-5 .9,5");
+    .attr("points", "1,0 .8,-5 .8,5");
 
   node = node.data(nodes);
 

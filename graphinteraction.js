@@ -57,6 +57,8 @@ function refreshNodeEditBox(citekey, citation) {
 	// Add custom fields
 	addFeatureBox("citations", citekey, citation);
 	addFeatureBox("read", citekey, citation);
+	// addFeatureBox("url", citekey, citation);
+	addCommentBox("abstract", citekey, citation);
 	addCommentBox("comments", citekey, citation);
 
 	// Add the citation key to the bottom
