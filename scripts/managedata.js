@@ -20,6 +20,10 @@ function loadBibFile (bibFile) {
 	});
 }
 
+// Try to automatically load the data file
+// if(document.location.hostname == "localhost")
+// window.onload = function() {loadBibFile("hcdereview.bib");};
+
 function addBibTex (bib_data) {
 	btparser = new BibtexParser();
     btparser.setInput(bib_data);

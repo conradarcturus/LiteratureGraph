@@ -6,20 +6,18 @@
 
 var detailbox = d3.select("#detailbox");
 
-// Standard buttons
-detailbox.append("input")
-	.attr("id", "button_refresh")
-	.attr("type", "button")
-	.attr("value", "Refresh Graph")
-	.on("click", function() {
-		bibTex2nodes(bibObject);
-	});
+// Header
+detailbox.append("div")
+	.html("Literature Graph")
+	.attr("class", "title");
 
-detailbox.append("input")
-	.attr("id", "button_saveBibTex")
-	.attr("type", "button")
-	.attr("value", "Save BibTex")
-	.on("click", makeBibTex);
+detailbox.append("div")
+	.html("Conrad Nied")
+	.attr("class", "subtitle");
+
+// Node Editing Box
+detailbox.append("div")
+	.attr("id", "nodeeditbox");
 
 // Box for uploading files
 uploadbox = detailbox.append("div")

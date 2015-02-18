@@ -11,12 +11,18 @@ function selectNode (data) {
 }
 
 function highlightNode(citekey) {
+
 	// Remove highlighting from the other ones
 	d3.selectAll(".selected")
-		.attr("class", function() {
-			console.log(this.attr("class"));
-			return this.attr("class");
-		});
+		.classed("selected", false);
+
+	// Add highlighting to nodes corrected to the citekey
+	d3.selectAll(".cited_" + citekey)
+		.classed("selected", true);
+	d3.selectAll(".citer_" + citekey)
+		.classed("selected", true);
+	d3.selectAll(".node_" + citekey)
+		.classed("selected", true);
 }
 
 function refreshNodeEditBox(citekey, citation) {
@@ -37,7 +43,7 @@ function refreshNodeEditBox(citekey, citation) {
 	if(description.length > 0)
 		nodeeditbox.append("div")
 			.html(description)
-			.attr("class", "authoryear");
+			.attr("class", "subtitle");
 
 	// Add standard features
 	addFeatureBox("title", citekey, citation);
@@ -57,6 +63,7 @@ function refreshNodeEditBox(citekey, citation) {
 	// Add custom fields
 	addFeatureBox("citations", citekey, citation);
 	addFeatureBox("read", citekey, citation);
+	addFeatureBox("tags", citekey, citation);
 	// addFeatureBox("url", citekey, citation);
 	addCommentBox("abstract", citekey, citation);
 	addCommentBox("comments", citekey, citation);
@@ -85,7 +92,7 @@ function addFeatureBox(field, citekey, citation) {
 		.attr("value", value)
 		.attr("class", "featureinput")
 		.on("keyup", function(d) {
-			if(d == "citations")
+			if(d == "citations" || d == "tags")
 				citation[d] = this.value.split(/[, ]+/);
 			else
 				citation[d] = this.value;

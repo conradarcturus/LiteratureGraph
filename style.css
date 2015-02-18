@@ -33,7 +33,7 @@ body {
 	margin-bottom: 10px;
 }
 
-#nodeeditbox div.authoryear {
+#detailbox div.subtitle {
 	width: 300px;
 	font-size: 0.9em;
 	margin-bottom: 10px;
@@ -44,26 +44,26 @@ body {
 	text-align: center;
 }
 
-#detailbox div.featurebox {
+div.featurebox {
 	width: 300px;
 	height: 25px;
 	padding-top: 5px;
 }
 
-#detailbox .featuretitle {
+.featuretitle {
 	width: 80px;
 	font-size: 0.8em;
 	text-align: right;
 	position: absolute;
 }
 
-#detailbox input.featureinput {
+input.featureinput {
 	width: 200px;
 	position: absolute;
 	left: 100px;
 }
 
-#detailbox div.commentbox {
+div.commentbox {
 	width: 300px;
 	height: 120px;
 }
@@ -83,12 +83,13 @@ body {
 }
 
 .node {
-  stroke: #fff;
-  stroke-width: 1.5px;
+	font-weight: normal;
 }
 
 .node.selected {
-  stroke: #00f;
+	font-weight: bold;
+  /*stroke: #00f;
+  /*stroke-width: 2px;*/
 }
 
 .link {
@@ -105,9 +106,14 @@ body {
 svg text {
 	font-size: 0.8em;
 	fill: black;
-	stroke: none;
+	/*stroke: none;*/
 	text-anchor: middle;
 	alignment-baseline: middle;
+	paint-order: stroke;
+  stroke: #fff;
+  /*stroke-width: 1.5px;*/
+  stroke-opacity: 0.5;
+  stroke-width: 3;
 }
 
 svg rect {
@@ -118,5 +124,17 @@ svg rect {
 .arrowhead {
 	fill: black;
   	opacity: .4;
+}
+
+.selected .arrowhead {
+  	opacity: .8;
+}
+
+#graphmenu {
+	left: 0px;
+	top: 0px;
+	width: 300px;
+	height: 100px;
+	position: absolute;
 }
 

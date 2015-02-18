@@ -3,7 +3,15 @@
 var width = 1000,
     height = 800;
 
-var color = d3.scale.category20();
+// var colorscale = d3.scale.category20();
+var coloroption = "read";
+var colorscale = {};
+colorscale["year"] = d3.scale.linear()
+    .domain([1900, 1985, 2000, 2010, 2015])
+    .range(["#000", "red", "#990", "#0b0", "blue"]);
+colorscale["read"] = d3.scale.linear()
+    .domain([-1, 1, 2, 3])
+    .range(["black", "#00b", "#0d0", "green"]);
 
 var force = d3.layout.force()
   .gravity(.05)
@@ -80,25 +88,47 @@ function graph_restart() {
   link = link.data(links);
 
   svggs = link.enter().insert("svg:g", ".node")
-      .attr("class", "linkgroup");
-
-  svggs.insert("line")
-      .attr({x1: 0, y1: 0, x2: 1, y2: 0})
+      // .attr("class", "linkgroup")
       .attr("class", function(d) {
-        classes = ["link",
+        classes = ["linkgroup",
           "cited_" + d.source.citekey,
           "citer_" + d.target.citekey]
         return classes.join(" ");
       });
 
+  // svggs.insert("line")
+  //     .attr({x1: 0, y1: 0, x2: 1, y2: 0})
+  //     .attr("class", "link");
+      // .attr("class", function(d) {
+        // classes = ["link",
+          // "cited_" + d.source.citekey,
+          // "citer_" + d.target.citekey]
+        // return classes.join(" ");
+      // });
+
   svggs.append("polygon")
     .attr("class", "arrowhead")
-    .attr("points", "1,0 .8,-5 .8,5");
+    .attr("points", "0,0 1,-2 1,2");
+    // .attr("points", "1,0 .8,-5 .8,5");
+  // svggs.append("circle")
+  //   .attr("class", "arrowhead")
+  //   .attr("fill", "purple")
+  //   .attr("cx", "1")
+  //   .attr("cy", "0")
+  //   .attr("r", "10");
+    // .attr("points", "1,0 .8,-5 .8,5");
 
   node = node.data(nodes);
 
   freshnode = node.enter().append("g")
-    .attr("class", "node")
+    // .attr("class", "node")
+    .attr("class", function(d) {
+      classes = ["node",
+        "node_" + d.citekey]
+      if("tags" in d.citation && d.citation.tags.length > 0)
+        classes.push(d.citation.tags);
+      return classes.join(" ");
+    })
     .on("mousedown", function(d) {
       d3.event.stopPropagation();
       selectNode(d);
@@ -116,11 +146,14 @@ function graph_restart() {
   // Refresh text if necessary
   node.selectAll(".node text")
     .style("fill", function(d) {
-      switch(d.group) {
-        case "2": return "#171";
-        case "1": return "#177";
-        default: return "#117";
-      }
+      if(coloroption in d.citation) {
+        return colorscale[coloroption](d.citation[coloroption]);
+      } else if("tags" in d.citation && d.citation.tags.indexOf(coloroption) != -1) {
+        return "blue";
+      } else if(coloroption == "untagged" && !("tags" in d.citation)) {
+        return "blue";
+      } else
+          return "#000";
       // return color(d.group);
     })
     .text(function(d) { return d.name; });
