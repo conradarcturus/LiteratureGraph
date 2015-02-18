@@ -22,38 +22,33 @@ graphmenu.append("input")
 
 // Add coloring options
 coloroptions = graphmenu.append("div")
-coloroption_list = ["Read", "Year", "NLP", "HCI", "UI"];
+// coloroption_list = ["Read", "Year", "NLP", "HCI", "UI"];
 
-function addColorOption(OptionName) {
+function addColorOption(OptionName, type) {
 	optionname = OptionName.toLowerCase();
+	typeoptionname = type.length > 0 ? type + "_" + optionname : optionname;
 	coloroptions.append("input")
-		.data([optionname])
-		.attr("id", "button_color_" + optionname)
+		.data([typeoptionname])
+		.attr("id", "button_color_" + typeoptionname)
 		.attr("type", "button")
 		.attr("value", OptionName)
 		.on("click", function(d) {
-			console.log(d);
 			coloroption = d;
 			graph_restart();
 		});
 }
 
-
 coloroptions.append("text")
 	.text("Coloring Scheme:");
-addColorOption("Read");
-addColorOption("Year");
+addColorOption("Read", "");
+addColorOption("Year", "");
 
-coloroptions.append("text")
-	.html("<br \>");
-addColorOption("HCI");
-addColorOption("UI");
-addColorOption("InfoSci");
-addColorOption("NLP");
-addColorOption("Values");
+coloroptions.append("text").html("<br \>");
+fields = ["HCI", "InfoSci", "NLP", "SocPsych", "PoliSci"," "];
+for (key in fields)
+	addColorOption(fields[key], "field");
 
-coloroptions.append("text")
-	.html("<br \>");
-addColorOption("SocPsych");
-addColorOption("PoliSci");
-addColorOption("Untagged");
+coloroptions.append("text").html("<br \>");
+fields = ["Social", "Consume", "Delib", "UI", "Values", "LWIC", " "];
+for (key in fields)
+	addColorOption(fields[key], "topics");

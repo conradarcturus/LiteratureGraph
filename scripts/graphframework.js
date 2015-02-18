@@ -125,8 +125,8 @@ function graph_restart() {
     .attr("class", function(d) {
       classes = ["node",
         "node_" + d.citekey]
-      if("tags" in d.citation && d.citation.tags.length > 0)
-        classes.push(d.citation.tags);
+      // if("tags" in d.citation && d.citation.tags.length > 0)
+        // classes.push(d.citation.tags);
       return classes.join(" ");
     })
     .on("mousedown", function(d) {
@@ -148,10 +148,17 @@ function graph_restart() {
     .style("fill", function(d) {
       if(coloroption in d.citation) {
         return colorscale[coloroption](d.citation[coloroption]);
-      } else if("tags" in d.citation && d.citation.tags.indexOf(coloroption) != -1) {
-        return "blue";
-      } else if(coloroption == "untagged" && !("tags" in d.citation)) {
-        return "blue";
+      } else if(coloroption.indexOf("_") >= 0) {
+        coloroptionparts = coloroption.split("_");
+        field = coloroptionparts[0];
+        value = coloroptionparts[1];
+        if(field in d.citation && d.citation[field].indexOf(value) != -1) {
+          return "blue";
+        } else if (value == " " && !(field in d.citation)) {
+          return "blue";
+        } else {
+          return "black";
+        }
       } else
           return "#000";
       // return color(d.group);

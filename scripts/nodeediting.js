@@ -53,7 +53,7 @@ function refreshNodeEditBox(citekey, citation) {
 	// Add any additional features
 	for (field in citation) {
 		// if(field == "read" || field == "title" || field == "author" || field == "year" || field == "citations" || field == "comments") {
-		if(["read", "title", "author", "year", "citations", "comments"].indexOf(field) != -1) {
+		if(["read", "title", "author", "year", "citations", "comments", "field", "topics"].indexOf(field) != -1) {
 			// do nothing here
 		} else {
 			addFeatureBox(field, citekey, citation);
@@ -63,7 +63,8 @@ function refreshNodeEditBox(citekey, citation) {
 	// Add custom fields
 	addFeatureBox("citations", citekey, citation);
 	addFeatureBox("read", citekey, citation);
-	addFeatureBox("tags", citekey, citation);
+	addFeatureBox("field", citekey, citation);
+	addFeatureBox("topics", citekey, citation);
 	// addFeatureBox("url", citekey, citation);
 	addCommentBox("abstract", citekey, citation);
 	addCommentBox("comments", citekey, citation);
@@ -92,7 +93,7 @@ function addFeatureBox(field, citekey, citation) {
 		.attr("value", value)
 		.attr("class", "featureinput")
 		.on("keyup", function(d) {
-			if(d == "citations" || d == "tags")
+			if(d == "citations" || d == "field" || d == "topics")
 				citation[d] = this.value.split(/[, ]+/);
 			else
 				citation[d] = this.value;
