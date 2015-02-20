@@ -53,7 +53,9 @@ function refreshNodeEditBox(citekey, citation) {
 	// Add any additional features
 	for (field in citation) {
 		// if(field == "read" || field == "title" || field == "author" || field == "year" || field == "citations" || field == "comments") {
-		if(["read", "title", "author", "year", "citations", "comments", "field", "topics"].indexOf(field) != -1) {
+		if(["title", "author", "year",
+		  "abstract", "citations", "field", "topics",
+		  "read", "comments"].indexOf(field) != -1) {
 			// do nothing here
 		} else {
 			addFeatureBox(field, citekey, citation);

@@ -11,7 +11,7 @@ colorscale["year"] = d3.scale.linear()
     .range(["#000", "red", "#990", "#0b0", "blue"]);
 colorscale["read"] = d3.scale.linear()
     .domain([-1, 1, 2, 3])
-    .range(["black", "#00b", "#0d0", "green"]);
+    .range(["black", "#00b", "#0b0", "#9d0"]);
 
 var force = d3.layout.force()
   .gravity(.05)
