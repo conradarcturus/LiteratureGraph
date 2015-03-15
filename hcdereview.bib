@@ -407,7 +407,8 @@ Online deliberation is good! Although only when people opt to do studies...},
   read={2},
   comments={A manual way to code quality of discourse, doesn't seem too generalizable but does regard many measures},
   field=[polisci],
-  topics=[delib]
+  topics=[delib],
+  abstract={In this paper, we develop a discourse quality index (DQI) that serves as a quantitative measure of discourse in deliberation. The DQI is rooted in Habermas' discourse ethics and provides an accurate representation of the most important principles underlying deliberation. At the same time, the DQI can be shown to be a reliable measurement instrument due to its focus on observable behavior and its detailed coding instructions. We illustrate the DQI for a parliamentary debate in the British House of Commons. We show that the DQI yields reliable data and we discuss how these data could be used in subsequent analysis. We conclude by discussing some limitations of the DQI and by identifying some areas in which it could prove useful.}
 }
 @inproceedings{verplanken2002motivated,
   title={Motivated decision making: effects of activation and self-centrality of values on choices and behavior.},
@@ -865,7 +866,9 @@ focuses on the Net neutrality debate, content analysis by experts leads to annot
   number={2},
   pages={179--212},
   year={2005},
-  publisher={AAPOR}
+  publisher={AAPOR},
+  abstract={Although the framing of public opinion has often been conceptualized as a collective and social process, experimental studies of framing have typically examined only individual, psychological responses to alternative message frames. In this research we employ for the first time group conversations as the unit of analysis (following Gamson 1992) in an experimental study of framing effects. Two hundred and thirty-five American citizens in 50 groups (17 homogeneously conservative groups, 15 homogeneously liberal groups, and 18 heterogeneous groups) discussed whether or not gay and lesbian partnerships should be legally recognized. Groups were randomly assigned to one of two framing conditions (a "homosexual marriage/ special rights" frame or a "civil union/equal rights" frame). Results indicated framing effects that were, in all cases, contingent on the ideological leanings of the group. The "marriage" frame tended to polarize group discussions along ideological lines. Both liberal and conservative groups appeared to find their opponents' frame more provocative, responding to them with a larger number of statements and expressing greater ambivalence than when reacting to more hospitable frames.},
+  field=[polisci]
 }
 @inproceedings{ritter2010unsupervised,
   title={Unsupervised modeling of twitter conversations},
@@ -888,4 +891,137 @@ focuses on the Net neutrality debate, content analysis by experts leads to annot
   comments={This research focused on privacy controls for IM. },
   read={1},
   citations=[erickson2000social]
+}
+@inproceedings{habermas1985theory,
+  title={The theory of communicative action: Lifeworld and system: A critique of functionalist reason},
+  author={Habermas, J{\"u}rgen and Habermas, J{\"u}rgen},
+  volume={2},
+  year={1985},
+  publisher={Beacon press},
+  field=[polisci]
+}
+@inproceedings{habermas1996contributions,
+  title={Contributions to a discourse theory of law and democracy},
+  author={Habermas, J{\"u}rgen and Rehg, William},
+  year={1996},
+  publisher={Polity Press Cambridge},
+  citations=[habermas1985theory],
+  field=[polisci]
+}
+@inproceedings{fairclough2003analysing,
+  title={Analysing discourse: Textual analysis for social research},
+  author={Fairclough, Norman},
+  year={2003},
+  publisher={Psychology Press},
+  citations=[habermas1985theory],
+  field=[]
+}
+@inproceedings{kotturi2015structure,
+  title={Structure and messaging techniques for online peer learning systems that increase stickiness},
+  author={Kotturi, Yasmine and Kulkarni, Chinmay and Bernstein, Michael S and Klemmer, Scott},
+  booktitle={Proceedings of the Second (2015) ACM Conference on Learning@ Scale},
+  pages={31--38},
+  year={2015},
+  organization={ACM},
+  field=[hci]
+}
+@inproceedings{strzalkowski2011modeling,
+  title={Modeling socio-cultural phenomena in online multi-party discourse},
+  author={Strzalkowski, Tomek and Broadwell, George Aaron and Stromer-Galley, Jennifer and Shaikh, Samira and Liu, Ting and Taylor, Sarah},
+  booktitle={Workshops at the Twenty-Fifth AAAI Conference on Artificial Intelligence},
+  year={2011},
+  abstract={We present in this paper, the application of a novel approach to computational modeling, understanding and detection of social phenomena in online multi-party discourse. A two-tiered approach was developed to detect a collection of social phenomena deployed by participants, such as topic control, task control, disagreement and involvement. We discuss how the mid-level social phenomena can be reliably detected in discourse and these measures can be used to differentiate participants of online discourse. Our approach works across different types of online chat and we show results on two specific data sets. },
+  citations=[adams2008topic,stolcke2000dialogue],
+  field=[nlp],
+  read={1}
+}
+@inproceedings{adams2008topic,
+  title={Topic detection and extraction in chat},
+  author={Adams, Paige H and Martell, Craig H},
+  booktitle={Semantic Computing, 2008 IEEE International Conference on},
+  pages={581--588},
+  year={2008},
+  organization={IEEE},
+  field=[nlp],
+  topics=[social],
+  abstract={Internet-based chat environments such as Internet Relay Chat and instant messaging pose a challenge for data mining and information retrieval systems due to the multithreaded, overlapping nature of the dialog and the nonstandard usage of language. In this paper we present preliminary methods of topic detection and topic thread extraction that augment a typical TF-IDF-based vector space model approach with temporal relationship information between posts of the chat dialog combined with WordNet hypernym augmentation. We show results that promise better performance than using only a TF-IDF bag-of-words vector space model.},
+  read={1}
+}
+@inproceedings{stolcke2000dialogue,
+  title={Dialogue act modeling for automatic tagging and recognition of conversational speech},
+  author={Stolcke, Andreas and Ries, Klaus and Coccaro, Noah and Shriberg, Elizabeth and Bates, Rebecca and Jurafsky, Daniel and Taylor, Paul and Martin, Rachel and Van Ess-Dykema, Carol and Meteer, Marie},
+  journal={Computational linguistics},
+  volume={26},
+  number={3},
+  pages={339--373},
+  year={2000},
+  publisher={MIT Press},
+  field=[nlp],
+  abstract={We describe a statistical approach for modeling dialogue acts in conversational speech, i.e., speechact-like units such as STATEMENT, QUESTION, BACKCHANNEL, AGREEMENT, DISAGREEMENT, and APOLOGY. Our model detects and predicts dialogue acts based on lexical, collocational, and prosodic cues, as well as on the discourse coherence of the dialogue act sequence. The dialogue model is based on treating the discourse structure of a conversation as a hidden Markov model and the individual dialogue acts as observations emanating from the model states. Constraints on the likely sequence of dialogue acts are modeled via a dialogue act n-gram. The statistical dialogue grammar is combined with word n-grams, decision trees, and neural networks modeling the idiosyncratic lexical and prosodic manifestations of each dialogue act. We develop a probabilistic integration of speech recognition with dialogue modeling, to improve both speech recognition and dialogue act classification accuracy. Models are trained and evaluated using a large hand-labeled database of 1,155 conversations from the Switchboard corpus of spontaneous human-to-human telephone speech. We achieved good dialogue act labeling accuracy (65% based on errorful, automatically recognized words and prosody, and 71% based on word transcripts, compared to a chance baseline accuracy of 35% and human accuracy of 84%) and a small reduction in word recognition error.},
+  read={1}
+}
+@inproceedings{mercier2012reasoning,
+  title={Reasoning is for arguing: Understanding the successes and failures of deliberation},
+  author={Mercier, Hugo and Landemore, H{\'e}l{\`e}ne},
+  journal={Political Psychology},
+  volume={33},
+  number={2},
+  pages={243--258},
+  year={2012},
+  publisher={Wiley Online Library},
+  citations=[steenbergen2003measuring],
+  abstract={Theoreticians of deliberative democracy have sometimes found it hard to relate to the seemingly contradictory experimental results produced by psychologists and political scientists. We suggest that this problem may be alleviated by inserting a layer of psychological theory between the empirical results and the normative political theory. In particular, we expose the argumentative theory of reasoning that makes the observed pattern of findings more coherent. According to this theory, individual reasoning mechanisms work best when used to produce and evaluate arguments during a public deliberation. It predicts that when diverse opinions are discussed, group reasoning will outperform individual reasoning. It also predicts that individuals have a strong confirmation bias. When people reason either alone or with like-minded peers, this confirmation bias leads them to reinforce their initial attitudes, explaining individual and group polarization. We suggest that the failures of reasoning are most likely to be remedied at the collective than at the individual leve},
+  field=[polisci]
+}
+@inproceedings{janssen2005online,
+  title={Online forums and deliberative democracy},
+  author={Janssen, Davy and Kies, Rapha{\"e}l},
+  journal={Acta pol{\'\i}tica},
+  volume={40},
+  number={3},
+  pages={317--335},
+  year={2005},
+  publisher={Palgrave Macmillan},
+  citations=[steenbergen2003measuring],
+  abstract={The Internet is rapidly becoming a part of the everyday lives of a majority of people in the Western world. People perform various activities on the Internet and one of them is discussing politics and society in so-called online forums. In this article, we present an overview of some of the empirical research that evaluates the quality of political conversations in online forums. In the first section, we distinguish research on Usenet groups, web-based political forums and e-consultation forums, and discuss some its findings. In the second section, we elaborate three original categories of variables that attempt to explain differences observed in the quality of deliberation. The third, more extensive section deals with methodological issues. It discusses the operationalisation of deliberative quality and the application of a set of criteria for the idealized public sphere to online conversations. In the conclusion, we present some objections to the previous research and offer some ideas for a more comprehensive approach to online forum analysis.},
+  comments={Paywall :/},
+  field=[polisci]
+}
+@inproceedings{black2011methods,
+  title={Methods for analyzing and measuring group deliberation},
+  author={Black, Laura W and Burkhalter, Stephanie and Gastil, John and Stromer-Galley, Jennifer},
+  journal={Sourcebook of political communication research: Methods, measures, and analytical techniques},
+  pages={323--345},
+  year={2011},
+  publisher={Routledge New York, NY},
+  citations=[steenbergen2003measuring],
+  field=[polisci]
+}
+@inproceedings{diakopoulos2011towards,
+  title={Towards quality discourse in online news comments},
+  author={Diakopoulos, Nicholas and Naaman, Mor},
+  booktitle={Proceedings of the ACM 2011 conference on Computer supported cooperative work},
+  pages={133--142},
+  year={2011},
+  organization={ACM},
+  abstract={With the growth in sociality and interaction around online news media, news sites are increasingly becoming places for communities to discuss and address common issues spurred by news articles. The quality of online news comments is of importance to news organizations that want to provide a valuable exchange of community ideas and maintain credibility within the community. In this work we examine the complex interplay between the needs and desires of news commenters with the functioning of different journalistic approaches toward managing comment quality. Drawing primarily on newsroom interviews and reader surveys, we characterize the comment discourse of SacBee.com, discuss the relationship of comment quality to both the consumption and production of news information, and provide a description of both readers’ and writers’ motivations for usage of news comments. We also examine newsroom strategies for dealing with comment quality as well as explore tensions and opportunities for value sensitive innovation within such online communities.},
+  field=[polisci]
+}
+@inproceedings{de2011identifying,
+  title={Identifying relevant social media content: leveraging information diversity and user cognition},
+  author={De Choudhury, Munmun and Counts, Scott and Czerwinski, Mary},
+  booktitle={Proceedings of the 22nd ACM conference on Hypertext and hypermedia},
+  pages={161--170},
+  year={2011},
+  organization={ACM},
+  abstract={As users turn to large scale social media systems like Twitter for topic-based content exploration, they quickly face the issue that there may be hundreds of thousands of items matching any given topic they might query. Given the scale of the potential result sets, how does one identify the “best” or “right” set of items? We explore a solution that aligns characteristics of the information space, including specific content attributes and the information diversity of the results set, with measurements of human information processing, including engagement and recognition memory. Using Twitter as a test bed, we propose a greedy iterative clustering technique for selecting a set of items on a given topic that matches a specified level of diversity. In a user study, we show that our proposed method yields sets of items that were, on balance, more engaging, better remembered, and rated as more interesting and informative compared to baseline techniques. Additionally, diversity indeed seemed to be important to participants in the study in the consumption of content. However as a rather surprising result, we also observe that content was perceived to be more relevant when it was highly homogeneous or highly heterogeneous. In this light, implications for the selection and evaluation of topic-centric item sets in social media contexts are discussed.},
+  field=[hci]
+}
+@inproceedings{de2012happy,
+  title={Happy, nervous or surprised? classification of human affective states in social media},
+  author={De Choudhury, Munmun and Gamon, Michael and Counts, Scott},
+  booktitle={Sixth International AAAI Conference on Weblogs and Social Media},
+  year={2012},
+  abstract={Sentiment classification has been a well-investigated research area in the computational linguistics community. However, most of the research is primarily focused on detecting simply the polarity in text, often needing extensive manual labeling of ground truth. Additionally, little attention has been directed towards a finer analysis of human moods and affective states. Motivated by research in psychology, we propose and develop a classifier of several human affective states in social media. Starting with about 200 moods, we utilize mechanical turk studies to derive naturalistic signals from posts shared on Twitter about a variety of affects of individuals. This dataset is then deployed in an affect classification task with promising results. Our findings indicate that different types of affect involve different emotional content and usage styles; hence the performance of the classifier on various affects can differ considerably.},
+  field=[infosci]
 }

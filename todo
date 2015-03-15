@@ -4,16 +4,16 @@ todo list
 Done - Effects to changes color of nodes
 Done - Change to better Arrow Style
 Done - Selected node bolded
-Categories -> hci, ui, nlp, values, social computing, data mining, dataset
-Find
+Done - Categories -> hci, ui, nlp, values, social computing, data mining, dataset
 
 # Graph Menu
-Make
-Move buttons to it
-Save button -> dl
+Done - Make
+Done - Move buttons to it
+Done - Save button -> dl
+Reorganize fields/topic selection to intersection/union
 
 # Detail Menu
 
 # Framework
-Automatically import
+Done - Automatically import
 Plug in with database?
