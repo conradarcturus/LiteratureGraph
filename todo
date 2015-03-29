@@ -11,9 +11,11 @@ Done - Make
 Done - Move buttons to it
 Done - Save button -> dl
 Reorganize fields/topic selection to intersection/union
+Search
+Toggle label visibility
 
 # Detail Menu
 
 # Framework
 Done - Automatically import
-Plug in with database?
+Plug in with database? At least some backend
