@@ -27,6 +27,16 @@ $.getScript("scripts/bibtex_js.js", function(){
 		});
 		$.getScript("scripts/graphframework.js", function(){
 		   console.log("Graph Framework loaded");
+		   
+
+			storedBibObject = localStorage.LiteratureGraph;
+			if(!bibObject || localStorage.LiteratureGraph == "[object Object]") { // this call isn't correct
+				loadBibFile("hcdereview.bib");
+			} else {
+				addBibTex(storedBibObject);
+			}
+
+			setInterval(storeBibTex, 60 * 1000); // Every minute save the current graph
 		});
 		$.getScript("scripts/nodeediting.js", function(){
 		   console.log("Node Editing loaded");
@@ -34,7 +44,5 @@ $.getScript("scripts/bibtex_js.js", function(){
 		$.getScript("scripts/graphmenu.js", function(){
 		   console.log("Graph Menu loaded");
 		});
-
-		loadBibFile("hcdereview.bib");
 	});
 });

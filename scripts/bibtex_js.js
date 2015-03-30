@@ -251,9 +251,10 @@ function BibtexParser() {
     }
   }
 
-  this.entry_body = function() {
+  this.entry_body = function(directive) {
     this.currentEntry = this.key();
-    this.entries[this.currentEntry] = new Object();    
+    this.entries[this.currentEntry] = new Object();  
+    this.entries[this.currentEntry].type = directive.substring(1).toLowerCase();  
     this.match(",");
     this.key_value_list();
   }
@@ -276,8 +277,8 @@ function BibtexParser() {
     this.value(); // this is wrong
   }
 
-  this.entry = function() {
-    this.entry_body();
+  this.entry = function(directive) {
+    this.entry_body(directive);
   }
 
   this.bibtex = function() {
@@ -291,7 +292,7 @@ function BibtexParser() {
       } else if (d == "@COMMENT") {
         this.comment();
       } else {
-        this.entry();
+        this.entry(d);
       }
       this.match("}");
     }

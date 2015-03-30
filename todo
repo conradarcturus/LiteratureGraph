@@ -13,9 +13,10 @@ Done - Save button -> dl
 Reorganize fields/topic selection to intersection/union
 Search
 Toggle label visibility
+Keywords
 
 # Detail Menu
 
 # Framework
 Done - Automatically import
-Plug in with database? At least some backend
+Done - Plug in with database? At least some backend -> Actually used local storage

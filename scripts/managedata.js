@@ -13,6 +13,11 @@ function editCitation(citekey, citation) {
 	bibObject[citekey] = citation;
 }
 
+		// // Store
+		// localStorage.setItem("lastname", "Smith");
+		// // Retrieve
+		// document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+
 function loadBibFile (bibFile) {
 	// Read File
 	$.get(bibFile, function( bib_data ) {
@@ -40,28 +45,46 @@ function addBibTex (bib_data) {
 	bibTex2nodes(bibObject);
 }
 
+function storeBibTex () {
+	bibTexString = makeBibTex();
+
+	localStorage.setItem("LiteratureGraph", bibTexString);
+	console.log("Graph saved locally");
+}
+
+function exportBibTex () {
+	bibTexString = makeBibTex();
+
+	var url = 'data:text/json;charset=utf8,' + encodeURIComponent(bibTexString);
+	window.open(url, '_blank');
+	window.focus();
+}
+
 function makeBibTex () {
 	// Write each entry
-	var data = [];
+	var bibTexString = [];
 	for (var citation in bibObject) {
-		var citestr = "@inproceedings{" + citation;
+		citetype = "inproceedings";
+		if("type" in bibObject[citation])
+			citetype = bibObject[citation].type;
+
+		var citestr = "@" + citetype + "{" + citation;
 
 		for (var key in bibObject[citation]) {
-			value = bibObject[citation][key];
-			if(value.constructor == Array)
-				value = '[' + value.join(",") + ']';
-			else
-				value = '{' + value + '}';
-			citestr += ",\n  " + key + "=" + value;
+			if(key != "type") {
+				value = bibObject[citation][key];
+				if(value.constructor == Array)
+					value = '[' + value.join(",") + ']';
+				else
+					value = '{' + value + '}';
+				citestr += ",\n  " + key + "=" + value;
+			}
 		}
 
 		citestr += "\n}";
-		data[data.length] = citestr;
+		bibTexString[bibTexString.length] = citestr;
 	}
-	data = data.join("\n");
-	console.log(data);
+	bibTexString = bibTexString.join("\n");
 
-	var url = 'data:text/json;charset=utf8,' + encodeURIComponent(data);
-	window.open(url, '_blank');
-	window.focus();
+	return bibTexString;
 }

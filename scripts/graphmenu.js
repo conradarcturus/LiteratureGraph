@@ -17,8 +17,14 @@ graphmenu.append("input")
 graphmenu.append("input")
 	.attr("id", "button_saveBibTex")
 	.attr("type", "button")
-	.attr("value", "Save BibTex")
-	.on("click", makeBibTex);
+	.attr("value", "Save")
+	.on("click", storeBibTex);
+
+graphmenu.append("input")
+	.attr("id", "button_exportBibTex")
+	.attr("type", "button")
+	.attr("value", "Export")
+	.on("click", exportBibTex);
 
 // Add coloring options
 coloroptions = graphmenu.append("div")
