@@ -68,6 +68,17 @@ var nextNodeID = 0;
 //   graph_restart();
 // }
 
+flag_view_year = true;
+function viewToggle(option) {
+  switch(option) {
+    case "year":
+      flag_view_year = !flag_view_year;
+      break;
+  }
+
+  graph_restart();
+}
+
 function tick() {
   d3.selectAll(".linkgroup")
     .attr("transform", function(d) {
@@ -77,7 +88,7 @@ function tick() {
           dr = Math.sqrt(dx * dx + dy * dy);
       return "translate(" + d.source.x + "," + d.source.y + ") " +
              "rotate(" + da + ")" +
-             "scale(" + dr + ",1) " ;
+             "scale(" + dr + ", 1) " ;
              // "scale(" + dx + "," + dy + ") " ;
     });
 
@@ -163,7 +174,15 @@ function graph_restart() {
           return "#000";
       // return color(d.group);
     })
-    .text(function(d) { return d.name; });
+    .text(function(d) {
+      if(flag_view_year)
+        return d.name;
+      else
+        if("author" in d.citation)
+          return d.citation.author.split(/[, ]/)[0];
+        else
+          return d.name;
+    });
 }
 
 function addNode (citekey, citation) {

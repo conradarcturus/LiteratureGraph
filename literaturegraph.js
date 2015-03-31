@@ -33,10 +33,10 @@ $.getScript("scripts/bibtex_js.js", function(){
 			if(!bibObject || localStorage.LiteratureGraph == "[object Object]") { // this call isn't correct
 				loadBibFile("hcdereview.bib");
 			} else {
-				addBibTex(storedBibObject);
+				addBibliography(storedBibObject);
 			}
 
-			setInterval(storeBibTex, 60 * 1000); // Every minute save the current graph
+			setInterval(storeBibliography, 60 * 1000); // Every minute save the current graph
 		});
 		$.getScript("scripts/nodeediting.js", function(){
 		   console.log("Node Editing loaded");

@@ -15,20 +15,27 @@ graphmenu.append("input")
 	});
 
 graphmenu.append("input")
-	.attr("id", "button_saveBibTex")
+	.attr("id", "button_saveBibliography")
 	.attr("type", "button")
 	.attr("value", "Save")
-	.on("click", storeBibTex);
+	.on("click", storeBibliography);
 
 graphmenu.append("input")
-	.attr("id", "button_exportBibTex")
+	.attr("id", "button_exportBibliography")
 	.attr("type", "button")
 	.attr("value", "Export")
-	.on("click", exportBibTex);
+	.on("click", exportBibliography);
+
+// Add View Options
+viewoptions = graphmenu.append("div");
+viewoptions.append("input")
+		.attr("id", "button_view_year")
+		.attr("type", "button")
+		.attr("value", "View Year")
+		.on("click", function(){ viewToggle("year"); });
 
 // Add coloring options
-coloroptions = graphmenu.append("div")
-// coloroption_list = ["Read", "Year", "NLP", "HCI", "UI"];
+coloroptions = graphmenu.append("div");
 
 function addColorOption(OptionName, type) {
 	optionname = OptionName.toLowerCase();

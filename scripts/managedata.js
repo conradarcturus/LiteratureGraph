@@ -9,27 +9,26 @@ function setBibObject(data) {
 	this.bibObject = data;
 }
 
+function clearBibObjectAndRefresh() {
+	bibObject = {};
+	
+	setBibObject(bibObject);
+
+	bibTex2nodes(bibObject);
+}
+
 function editCitation(citekey, citation) {
 	bibObject[citekey] = citation;
 }
 
-		// // Store
-		// localStorage.setItem("lastname", "Smith");
-		// // Retrieve
-		// document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-
-function loadBibFile (bibFile) {
+function loadBibliography (bibFile) {
 	// Read File
 	$.get(bibFile, function( bib_data ) {
-	    addBibTex(bib_data);
+	    addBibliography(bib_data);
 	});
 }
 
-// Try to automatically load the data file
-// if(document.location.hostname == "localhost")
-// window.onload = function() {loadBibFile("hcdereview.bib");};
-
-function addBibTex (bib_data) {
+function addBibliography (bib_data) {
 	btparser = new BibtexParser();
     btparser.setInput(bib_data);
     btparser.bibtex();
@@ -45,22 +44,22 @@ function addBibTex (bib_data) {
 	bibTex2nodes(bibObject);
 }
 
-function storeBibTex () {
-	bibTexString = makeBibTex();
+function storeBibliography () {
+	bibTexString = makeBibliography();
 
 	localStorage.setItem("LiteratureGraph", bibTexString);
 	console.log("Graph saved locally");
 }
 
-function exportBibTex () {
-	bibTexString = makeBibTex();
+function exportBibliography () {
+	bibTexString = makeBibliography();
 
 	var url = 'data:text/json;charset=utf8,' + encodeURIComponent(bibTexString);
 	window.open(url, '_blank');
 	window.focus();
 }
 
-function makeBibTex () {
+function makeBibliography () {
 	// Write each entry
 	var bibTexString = [];
 	for (var citation in bibObject) {
