@@ -30,7 +30,7 @@ $.getScript("scripts/bibtex_js.js", function(){
 		   
 
 			storedBibliography = localStorage.LiteratureGraph;
-			if(!bibliography || localStorage.LiteratureGraph == "[object Object]") { // this call isn't correct
+			if(!storedBibliography || storedBibliography == "[object Object]") { // this call isn't correct
 				loadBibFile("hcdereview.bib");
 			} else {
 				addBibliography(storedBibliography);
