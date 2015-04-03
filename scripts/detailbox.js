@@ -68,7 +68,7 @@ uploadbox.append("text")
 	.attr("class", "featuretitle");
 
 uploadbox.append("input")
-	.attr("id", "button_loadBibTex")
+	.attr("id", "button_loadBibliography")
 	.attr("type", "file")
 	.attr("class", "featureinput")
 	.on("change", function() {
@@ -81,7 +81,7 @@ uploadbox.append("input")
 
 			var reader = new FileReader();
 			reader.onload = function(e) { 
-				addBibTex(e.target.result);
+				addBibliography(e.target.result);
 			}
 			reader.readAsText(file);
 		} else { 
@@ -104,7 +104,7 @@ featurebox.append("input")
 	.attr("class", "featureinput")
 	.on("click", function(d) {
 		// console.log(bibtexinputbox[0][0].value);
-		addBibTex(bibtexinputbox[0][0].value);
+		addBibliography(bibtexinputbox[0][0].value);
 		bibtexinputbox[0][0].value = "";
     });
 
