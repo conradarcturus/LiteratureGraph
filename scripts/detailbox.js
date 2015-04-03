@@ -15,6 +15,46 @@ detailbox.append("div")
 	.html("Conrad Nied")
 	.attr("class", "subtitle");
 
+// Keyword search
+searchbox = detailbox.append("div")
+	.attr("id", "search_box")
+	.attr("class", "featurebox");
+
+searchbox.append("div")
+	.text("Search: ")
+	.attr("class", "featuretitle");
+
+searchbox.append("input")
+	.attr("class", "featureinput")
+	.attr("id", "input_keyword")
+	.attr("type", "search")
+	.attr("results", "5")
+	.attr("name", "input_keyword")
+	.on("input", function() {
+		// Select nodes with the keyword
+		selectByKeyword(this.value);
+	})
+	.on("click", function() {
+		// Select nodes with the keyword
+		selectByKeyword(this.value);
+	});
+
+// searchbox.append("text")
+// 	.text("Search: ")
+
+// searchform = searchbox.append("input")
+// 	.attr("id", "input_keyword")
+// 	.attr("type", "search")
+// 	.attr("results", "5")
+// 	.attr("name", "input_keyword")
+// 	.on("input", function() {
+// 		// Select nodes with the keyword
+// 		console.log(this.value);
+// 		if(this.value.length > 0 && this.value != undefined)
+// 			selectByKeyword(this.value);
+// 	});
+
+
 // Node Editing Box
 detailbox.append("div")
 	.attr("id", "nodeeditbox");

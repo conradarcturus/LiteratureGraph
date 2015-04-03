@@ -2,20 +2,48 @@
 
 var nodeeditbox = d3.select("#nodeeditbox");
 
+function selectByKeyword(keyword) {
+	citekeys = [];
+
+	if(keyword.length > 0) {
+		regex = new RegExp(keyword);
+
+		bibliography = getBibliography();
+		for (citekey in bibliography) {
+			if(regex.test(bibliography[citekey].words))
+				citekeys.push(citekey);
+		}
+	}
+
+	highlightNodes(citekeys);
+}
+
 function selectNode (data) {
 	// Highlight node
-	highlightNode(data.citekey);
+	highlightNodes(data.citekey);
 
 	// Update node editing box
 	refreshNodeEditBox(data.citekey, data.citation);
 }
 
-function highlightNode(citekey) {
+function highlightNodes(citekey) {
 
 	// Remove highlighting from the other ones
 	d3.selectAll(".selected")
 		.classed("selected", false);
 
+	// Add highlighting to nodes corrected to the citekey
+	if(Array.isArray(citekey)) {
+		for (i_citekey in citekey) {
+			highlightNode(citekey[i_citekey]);
+		}
+	} else {
+		highlightNode(citekey);
+	}
+
+}
+
+function highlightNode(citekey) {
 	// Add highlighting to nodes corrected to the citekey
 	d3.selectAll(".cited_" + citekey)
 		.classed("selected", true);
@@ -52,10 +80,9 @@ function refreshNodeEditBox(citekey, citation) {
 
 	// Add any additional features
 	for (field in citation) {
-		// if(field == "read" || field == "title" || field == "author" || field == "year" || field == "citations" || field == "comments") {
 		if(["title", "author", "year",
 		  "abstract", "citations", "field", "topics",
-		  "read", "comments"].indexOf(field) != -1) {
+		  "read", "comments", "words"].indexOf(field) != -1) {
 			// do nothing here
 		} else {
 			addFeatureBox(field, citekey, citation);

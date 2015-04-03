@@ -29,11 +29,11 @@ $.getScript("scripts/bibtex_js.js", function(){
 		   console.log("Graph Framework loaded");
 		   
 
-			storedBibObject = localStorage.LiteratureGraph;
-			if(!bibObject || localStorage.LiteratureGraph == "[object Object]") { // this call isn't correct
+			storedBibliography = localStorage.LiteratureGraph;
+			if(!bibliography || localStorage.LiteratureGraph == "[object Object]") { // this call isn't correct
 				loadBibFile("hcdereview.bib");
 			} else {
-				addBibliography(storedBibObject);
+				addBibliography(storedBibliography);
 			}
 
 			setInterval(storeBibliography, 60 * 1000); // Every minute save the current graph

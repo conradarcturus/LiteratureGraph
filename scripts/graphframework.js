@@ -4,7 +4,7 @@ var width = 1000,
     height = 800;
 
 // var colorscale = d3.scale.category20();
-var coloroption = "read";
+var coloroption = "none";
 var colorscale = {};
 colorscale["year"] = d3.scale.linear()
     .domain([1900, 1985, 2000, 2010, 2015])
@@ -248,16 +248,16 @@ function connectNode (citekey, citation) {
 }
 
 
-function bibTex2nodes (bibObject) {
+function bibTex2nodes (bibliography) {
 
   // All the nodes to the nodes object
-  for (var citekey in bibObject) {
-    addNode(citekey, bibObject[citekey]);
+  for (var citekey in bibliography) {
+    addNode(citekey, bibliography[citekey]);
   }
 
   // Connect the nodes
-  for (var citekey in bibObject) {
-    connectNode(citekey, bibObject[citekey]);
+  for (var citekey in bibliography) {
+    connectNode(citekey, bibliography[citekey]);
   }
 
   graph_restart();

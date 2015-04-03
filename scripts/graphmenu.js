@@ -11,7 +11,7 @@ graphmenu.append("input")
 	.attr("type", "button")
 	.attr("value", "Refresh Graph")
 	.on("click", function() {
-		bibTex2nodes(bibObject);
+		bibTex2nodes(bibliography);
 	});
 
 graphmenu.append("input")
@@ -29,10 +29,10 @@ graphmenu.append("input")
 // Add View Options
 viewoptions = graphmenu.append("div");
 viewoptions.append("input")
-		.attr("id", "button_view_year")
-		.attr("type", "button")
-		.attr("value", "View Year")
-		.on("click", function(){ viewToggle("year"); });
+	.attr("id", "button_view_year")
+	.attr("type", "button")
+	.attr("value", "Toggle View Year")
+	.on("click", function(){ viewToggle("year"); });
 
 // Add coloring options
 coloroptions = graphmenu.append("div");
@@ -53,15 +53,16 @@ function addColorOption(OptionName, type) {
 
 coloroptions.append("text")
 	.text("Coloring Scheme:");
+addColorOption("All Black", "");
 addColorOption("Read", "");
 addColorOption("Year", "");
 
-coloroptions.append("text").html("<br \>");
-fields = ["HCI", "InfoSci", "NLP", "SocPsych", "PoliSci"," "];
-for (key in fields)
-	addColorOption(fields[key], "field");
+// coloroptions.append("text").html("<br \>");
+// fields = ["HCI", "InfoSci", "NLP", "SocPsych", "PoliSci"," "];
+// for (key in fields)
+// 	addColorOption(fields[key], "field");
 
-coloroptions.append("text").html("<br \>");
-fields = ["Social", "Consume", "Delib", "UI", "Values", "LWIC", " "];
-for (key in fields)
-	addColorOption(fields[key], "topics");
+// coloroptions.append("text").html("<br \>");
+// fields = ["Social", "Consume", "Delib", "UI", "Values", "LWIC", " "];
+// for (key in fields)
+// 	addColorOption(fields[key], "topics");

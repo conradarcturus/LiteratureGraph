@@ -1,24 +1,24 @@
-var bibObject = {};
+var bibliography = {};
 var btparser = new BibtexParser();
 
-function getBibObject() {
-	return bibObject;
+function getBibliography() {
+	return bibliography;
 }
 
-function setBibObject(data) {
-	this.bibObject = data;
+function setBibliography(data) {
+	this.bibliography = data;
 }
 
-function clearBibObjectAndRefresh() {
-	bibObject = {};
+function clearBibliographyAndRefresh() {
+	bibliography = {};
 	
-	setBibObject(bibObject);
+	setBibliography(bibliography);
 
-	bibTex2nodes(bibObject);
+	bibTex2nodes(bibliography);
 }
 
 function editCitation(citekey, citation) {
-	bibObject[citekey] = citation;
+	bibliography[citekey] = citation;
 }
 
 function loadBibliography (bibFile) {
@@ -36,12 +36,27 @@ function addBibliography (bib_data) {
     // iterate over bibTeX entries
     var entries = btparser.getEntries();
 
+    // Get keywords for the entries
+    for (citekey in entries) {
+    	citation = entries[citekey];
+    	words = "";
+    	for (key in citation) {
+    		if(["title", "author", "year", "abstract", "comments"].indexOf(key) != -1) {
+    			words += " | " + citation[key].toLowerCase();
+	    	}
+    		if(["field", "topics"].indexOf(key) != -1) {
+    			words += " | " + citation[key].join(" ").toLowerCase();
+	    	}
+    	}
+    	citation.words = words;
+    }
+
 	// Merge with previous bibliography object
-	bibObject = $.extend({}, bibObject, entries);
-	setBibObject(bibObject);
+	bibliography = $.extend({}, bibliography, entries);
+	setBibliography(bibliography);
 
 	// Reset the graph
-	bibTex2nodes(bibObject);
+	bibTex2nodes(bibliography);
 }
 
 function storeBibliography () {
@@ -62,16 +77,16 @@ function exportBibliography () {
 function makeBibliography () {
 	// Write each entry
 	var bibTexString = [];
-	for (var citation in bibObject) {
+	for (var citation in bibliography) {
 		citetype = "inproceedings";
-		if("type" in bibObject[citation])
-			citetype = bibObject[citation].type;
+		if("type" in bibliography[citation])
+			citetype = bibliography[citation].type;
 
 		var citestr = "@" + citetype + "{" + citation;
 
-		for (var key in bibObject[citation]) {
-			if(key != "type") {
-				value = bibObject[citation][key];
+		for (var key in bibliography[citation]) {
+			if(key != "type" && key != "words") {
+				value = bibliography[citation][key];
 				if(value.constructor == Array)
 					value = '[' + value.join(",") + ']';
 				else

@@ -21,12 +21,6 @@ body {
 	padding: 10px;
 }
 
-#nodeeditbox {
-	border: 1px solid black;
-	padding: 5px;
-}
-
-
 #detailbox div.title {
 	width: 300px;
 	font-weight: bold;
@@ -37,6 +31,20 @@ body {
 	width: 300px;
 	font-size: 0.9em;
 	margin-bottom: 10px;
+}
+
+#selectionbox {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+#selection_search {
+	width: 300px;
+}
+
+#nodeeditbox {
+	border: 1px solid black;
+	padding: 5px;
 }
 
 #nodeeditbox div.citekey {
