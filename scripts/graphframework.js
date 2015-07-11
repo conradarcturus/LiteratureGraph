@@ -44,7 +44,6 @@ graph_restart();
 
 // Add Interactions
 
-
 function mousemove() {
   // nothing
 }
@@ -305,3 +304,26 @@ function addNeighbor (citer, cited) {
 }
 
 
+// Visibility
+Array.prototype.diff = function(a) {
+    return this.filter(function(i) {return a.indexOf(i) < 0;});
+};
+
+/*
+ * addClassToNodes
+ * Appends a class to nodes with the citekeys as given
+ *
+ * @param citekeys array of strings with the citation keys
+ */
+addClassToNodes(citekeys, affectEdges, newclass, othersclass) {
+  nodes_all = d3.selectAll(".node");
+  nodes_included = [];
+  for (i in citekeys) {
+    nodes_included.push(d3.select(".node_" + citekeys[i]));
+  }
+  nodes_excluded = nodes_all.diff(nodes_included);
+
+  if(affectEdges) {
+
+  }
+}

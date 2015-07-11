@@ -10,12 +10,14 @@ Done - Categories -> hci, ui, nlp, values, social computing, data mining, datase
 Done - Make
 Done - Move buttons to it
 Done - Save button -> dl
-Reorganize fields/topic selection to intersection/union
-	Draggable
-Search
 Done - Toggle label visibility
+Done - Keywords / Search
+Partial - Reorganize fields/topic selection to intersection/union
+	Draggable
+	Make table, 2 dimensions: visibility & criteria
+		Criteria: Exclusive (must have), Inclusive (may have), Neighbors of Exclusive, Neighbors of Inclusive
+		Visibility: Highlighted, Bolded, Normal, Muted, Invisible
 Add alternate labels
-Keywords
 Collapsable nodes
 Collapsable groups
 Inclusion/Exclusion Criteria
@@ -25,3 +27,7 @@ Inclusion/Exclusion Criteria
 # Framework
 Done - Automatically import
 Done - Plug in with database? At least some backend -> Actually used local storage
+
+
+
+canvas = raster image for HTML

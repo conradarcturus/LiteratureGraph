@@ -15,22 +15,31 @@ function selectByKeyword(keyword) {
 		}
 	}
 
-	highlightNodes(citekeys);
+	selectNodes(citekeys, true);
 }
 
 function selectNode (data) {
 	// Highlight node
-	highlightNodes(data.citekey);
+	selectNodes(data.citekey, false);
 
 	// Update node editing box
 	refreshNodeEditBox(data.citekey, data.citation);
 }
 
-function highlightNodes(citekey) {
+function selectNodes(citekey, explicitlyDeselectOthers) {
 
 	// Remove highlighting from the other ones
 	d3.selectAll(".selected")
 		.classed("selected", false);
+	if(explicitlyDeselectOthers) {
+		d3.selectAll(".linkgroup")
+			.classed("deselected", true);
+		d3.selectAll(".node")
+			.classed("deselected", true);
+	} else {
+		d3.selectAll(".deselected")
+			.classed("deselected", false);
+	}
 
 	// Add highlighting to nodes corrected to the citekey
 	if(Array.isArray(citekey)) {
@@ -43,17 +52,22 @@ function highlightNodes(citekey) {
 
 }
 
-function highlightNode(citekey) {
+function selectNode(citekey) {
 	// Add highlighting to nodes corrected to the citekey
 	d3.selectAll(".cited_" + citekey)
-		.classed("selected", true);
+		.classed("selected", true)
+		.classed("deselected", false);
 	d3.selectAll(".citer_" + citekey)
-		.classed("selected", true);
+		.classed("selected", true)
+		.classed("deselected", false);
 	d3.selectAll(".node_" + citekey)
-		.classed("selected", true);
+		.classed("selected", true)
+		.classed("deselected", false);
 }
 
 function refreshNodeEditBox(citekey, citation) {
+	if(!citekey || !citation) return;
+
 	// Clear the previous content
 	nodeeditbox.selectAll("*").remove();
 
